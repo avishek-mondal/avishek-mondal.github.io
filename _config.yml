@@ -1,0 +1,36 @@
+# site settings
+title: Avishek Mondal
+
+email: mondalavishek@outlook.com
+description: A rudimentary catalogue
+# baseurl: "" # the subpath of your site, e.g. /blog
+# url: # the base hostname & protocol for your site
+author: Avishek Mondal
+
+
+# homepage tiles
+tiles-source: pages # accepts "posts" or "pages"
+tiles-count: 6
+
+# social settings
+
+linkedin_url: https://www.linkedin.com/in/mondalavishek
+github_url: https://www.github.com/avishek-mondal
+
+# build settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: html
+    css_class   : 'syntax'
+    block:
+      line_numbers: true
+      start_line: 1
+
+
+sass:
+  style: compressed
+  quiet_deps: true

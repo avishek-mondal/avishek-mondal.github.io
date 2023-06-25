@@ -1,0 +1,101 @@
+I"?1<p>So there was a basic Java question I have had for a while - what happens if we try an add user defined objects into HashMaps/HashSets/TreeSets? It is admittedly, a weird question to have. But naturally, Java by default does not make user defined classes comparable (because you know.. as the name sugests - user-defined).</p>
+
+<p>An example of when this is  like BFS or DFS in a 2D matrix setting. So instead of using 2D matrix to store all the co-ordinates you have visited, you can just use a HashMap to keep track of visited co-ordinates.</p>
+
+<p>I went to look, and found this great <a href="https://dzone.com/articles/the-hidden-contract-between-equals-and-comparable">resource</a>. Turns out, different symbol table and set implementations in Java add and compare objects based on different methods. To quote <a href="https://dzone.com/articles/the-hidden-contract-between-equals-and-comparable">this article</a> -  “<strong>HashMap</strong>, <strong>ArrayList</strong>, and <strong>HashSet</strong> add elements based on the <strong>equals</strong> method”, while “<strong>TreeMap</strong> and <strong>TreeSet</strong> are ordered and use the <strong>compareTo</strong> method”! Who knew?</p>
+
+<h2 id="overriding-equals-and-hashcode">Overriding .equals() and .hashCode()</h2>
+
+<p>So there is a “contract” between the equals method and the hashCode method - if you’re overriding the equals method, you also have to override the hashCode method if not ~b a d things~ happen. So if you want to use a HashSet/HashMap (as you do for most interview coding questions) you have to do it this way. Example using our Point class -</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Point</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+
+        <span class="nc">Point</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getX</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getY</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">o</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="nc">Point</span> <span class="n">other</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Point</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="na">getX</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+            <span class="c1">// just use some inbuilt hashcode generator </span>
+            <span class="k">return</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">hash</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span></code></pre></figure>
+
+<p>We can obviously debate the wisdom of using Objects.hash (maybe some bad things might happen in edge cases) as opposed to coming up with our own hashing function (definitely some bad things will happen in edge cases) - but why would we? We’re all friends here, and this is just an example.</p>
+
+<h2 id="comparable-interface">Comparable interface</h2>
+
+<p>If for some reason, you want to use TreeSets/TreeMaps, you have to then implement your user defined class as a Comparable interface. But this is tricky! We are talking about 2D points here - how do you “compare” them? This is up to you to decide. Say for whatever application, we want to sort by x-coordinate, and then by y coordinate. With the same point class, it could be something like -</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Point</span> <span class="kd">implements</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="nc">Point</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+
+        <span class="nc">Point</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getX</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getY</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">Point</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">==</span> <span class="n">o</span><span class="o">.</span><span class="na">getX</span><span class="o">())</span> <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">o</span><span class="o">.</span><span class="na">getY</span><span class="o">());</span>
+            <span class="k">else</span> <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">o</span><span class="o">.</span><span class="na">getX</span><span class="o">());</span>
+
+
+        <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>So yea that is it.</p>
+
+<h2 id="final-note">Final note</h2>
+
+<p>Ok, so the the 2D point thing was really contrived. If you really had to do it in an interview situation, you should put in ArrayLists into your HashMaps/HashSets, everything is already pre-built for you!</p>
+
+<p>Reminder of how this works -</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span>
+
+<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">p1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="n">p1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">m</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p1</span><span class="o">);</span>
+
+<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="c1">// prints false</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">p2</span><span class="o">));</span>
+
+
+<span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">p3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">p3</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="n">p3</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="c1">// prints true</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">p3</span><span class="o">));</span></code></pre></figure>
+:ET

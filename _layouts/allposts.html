@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  -->
+<html>
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %} 
+    
+    
+    <!-- Main -->
+    <div id="main" class="alt">
+
+      <!-- One -->
+      <section id="one">
+	<div class="inner">
+          {% for post in site.posts %}
+	  {% if post.title != 404 %}
+	  <header class="major">
+      <h1><a href="{{post.url}}">{{ post.title }}</a></h1>
+	  </header>
+    {% if post.image %}
+    <span class="image main">
+      <img src="{{ site.baseurl }}/{{ post.image }}" alt="" />
+      {%if post.image_caption%}
+        <figcaption>{{post.image_caption}}</figcaption>
+      {%endif%}
+    </span>
+    {% endif %}
+    
+    {%if post.description%}
+    <p>{{ post.description }}<br></p>
+    {%endif%}
+    <p><a href="{{post.url}}">Click to view more</a></p>
+	  {% endif %}
+          {% endfor %}
+	</div>
+      </section>
+
+    </div>
+
+    {% include footer.html %}
+
+  </body>
+
+</html>
