@@ -55,7 +55,7 @@ image: assets/images/Oxford_Building_Sunset.jpg
 				<header class="major">
 					<h3>Universities</h3>
 				</header>
-				<p align="justify">I studied in the University of Oxford from 2015 to 2019, graduating with First Class Honours in engineering. I spent my final undergraduate year (2018-2019) as a visiting student in Princeton University. I then came back to the University of Oxford and completed a MsC in Computer Science with distinction in the 2019-2020 academic year.  </p>
+				<p align="justify">I studied in the University of Oxford from 2015 to 2019, graduating with First Class Honours in engineering. I spent my final undergraduate year (2018-2019) as a visiting student in Princeton University. I then came back to the University of Oxford and completed a MSc in Computer Science with distinction in the 2019-2020 academic year.  </p>
 			</div>
 		</div>
 	</section>

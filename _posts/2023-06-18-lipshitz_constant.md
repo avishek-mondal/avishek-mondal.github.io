@@ -7,7 +7,7 @@ katex: True
 DISCLAIMER: If you spot an error, please feel free to email me. 
 
 
-The "Understanding Deep Learning" book has recently come out (you can look at it [here](https://udlbook.github.io/udlbook/)), and is a great resource. In the appendices, it contains several statements which can be non-obvious to those of us who have been out of touch with our linear algebra in our day jobs. 
+The "Understanding Deep Learning" book has recently come out (you can look at it [here](https://udlbook.github.io/udlbook/)), and is a great resource. In the appendices, it contains several statements which can be non-obvious to those of us who have been out of touch with linear algebra in our day jobs. 
 
 Here is one such statement: 
 
@@ -29,7 +29,7 @@ $$
 The value $$ \beta $$ is called the Lipschitz constant. Both definitions are taken from the UDL book in the link above.
 
 ### Vector norm
-The following definitions lifted from this very useful resource [here](https://www.math.drexel.edu/~foucart/TeachingFiles/F12/M504Lect6.pdf) (Definition 3)
+The following definitions are lifted from this very useful resource [here](https://www.math.drexel.edu/~foucart/TeachingFiles/F12/M504Lect6.pdf) (Definition 3)
 
 
 
@@ -124,7 +124,7 @@ This is the general case - the Lipschitz constant of a linear transform will be 
 
 We need one more step to prove the claim in the book, and I think that involves deviating away from the general case.
 
-Let us consider the following (going to be following the reasoning [here](https://www.sjsu.edu/faculty/guangliang.chen/Math253S20/lec7matrixnorm.pdf)) - when the 2-norm is used, the induced matrix operator is the following (called the spectral norm)
+I am going to be following some of the material [here](https://www.sjsu.edu/faculty/guangliang.chen/Math253S20/lec7matrixnorm.pdf). When the 2-norm is used, the induced matrix operator is the following (called the spectral norm):
 
 $$
 ||A||_2 = \text{max}_{x \neq 0} \{ \frac{|Ax|_2}{|x|_2} \}
@@ -136,7 +136,7 @@ $$ |y|_2^2 = y^Ty $$
 So let us take the square of the induced matrix operator.
 
 $$
-||A||_2^2 = \text{max}_{x \neq 0} \{ \frac{|Ax|_2}{|x|_2} \} \\
+||A||_2^2 = \text{max}_{x \neq 0} \{ \frac{|Ax|_2^2}{|x|_2^2} \} \\
 = \text{max}_{x \neq 0} \{ \frac{x^TA^TAx}{x^Tx} \}
 $$
 
@@ -147,9 +147,9 @@ A = U\Sigma V^T
 $$
 and then write $$ A^TA = (U\Sigma V^T)^T (U\Sigma V^T) = V \Sigma^T \Sigma V $$, where $$ \Sigma $$ is a diagonal matrix with the eigenvalues of A in the diagonal.
 
-Let $$ \lambda_1 $$ be the largest eigenvalue of A. The the maximum value of the ratio of $$ \frac{x^TA^TAx}{x^Tx} $$ can be shown to be $$ \lambda_1^2 $$.
+Let $$ \lambda_1 $$ be the largest eigenvalue of A. Then, the maximum value of the ratio of $$ \frac{x^TA^TAx}{x^Tx} $$ can be shown to be $$ \lambda_1^2 $$.
 
-This is the final step - showing 
+That was the final step - showing 
 $$ ||A||_2^2 = \lambda_1^2 $$,
 i.e. $$ ||A||_2 = \lambda_1 $$
 
