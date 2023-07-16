@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lipschitz constant of linear transformation
+title: Lipschitz constant of a linear transformation
 katex: True
 ---
 
