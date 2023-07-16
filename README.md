@@ -4,6 +4,7 @@ This README is a reference to the steps in this link [here](https://programmingh
 
 You'll need to work with ruby and jekyll -
 
+First, install `ruby` -
 ```bash
 brew install ruby
 

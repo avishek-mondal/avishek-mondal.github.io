@@ -21,6 +21,7 @@ github_url: https://www.github.com/avishek-mondal
 markdown: kramdown
 highlighter: rouge
 kramdown:
+  math_engine: katex
   input: GFM
   syntax_highlighter: rouge
   syntax_highlighter_opts:
