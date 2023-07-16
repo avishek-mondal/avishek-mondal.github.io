@@ -77,7 +77,7 @@ kramdown:
 When you get to this step `bundle exec jekyll serve --watch` to run Jekyll locally, you might get some errors about `bundler` versions, but they will tell you what to do. In the case on a new laptop, I had to run the following commands - 
 
 ```
-sudo gem install bundler:1.17.3
+gem install bundler:1.17.3
 ```
 and then 
 
