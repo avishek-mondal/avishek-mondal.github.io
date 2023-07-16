@@ -18,6 +18,21 @@ image: assets/images/Stronghold_Princeton_University_New_Jersey_USA.jpg
 <!-- Content -->
 <h2 id="content">Publications</h2>
 <ol>
+    <li><h4><a href="https://aclanthology.org/2022.emnlp-main.512.pdf"><u>Multi-Label Intent Detection via
+Contrastive Task Specialization of Sentence Encoders</u></a></h4>
+        <ul>
+            <li> 
+            EMNLP 2022.
+            </li> 
+        </ul>
+    </li>
+    <li><h4><a href="https://aclanthology.org/2021.emnlp-main.591.pdf"><u>Multilingual and Cross-Lingual Intent Detection from Spoken Data</u></a></h4>
+        <ul>
+            <li> 
+            EMNLP 2021.
+            </li> 
+        </ul>
+    </li>
     <li><h4><a href="https://ml4ad.github.io/files/papers2020/Real2sim:%20Automatic%20Generation%20of%20Open%20Street%20Map%20Towns%20For%20Autonomous%20Driving%20Benchmarks.pdf"><u>Real2sim: Automatic Generation of Open Street Map Towns For Autonomous Driving Benchmarks</u></a></h4>
         <ul>
             <li> 
