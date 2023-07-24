@@ -7,7 +7,7 @@ katex: True
 DISCLAIMER: If you spot an error, please feel free to email me. 
 
 
-The "Understanding Deep Learning" book has recently come out (you can look at it [here](https://udlbook.github.io/udlbook/)), and is a great resource. In the appendices, it contains several statements which can be non-obvious to those of us who have been out of touch with linear algebra in our day jobs. 
+The "Understanding Deep Learning" book has recently come out (you can look at it [here](https://udlbook.github.io/udlbook/), this post refers to the 2023-05-08 version), and is a great resource. In the appendices, it contains several statements which can be non-obvious to those of us who have been out of touch with linear algebra in our day jobs. 
 
 Here is one such statement: 
 
