@@ -83,7 +83,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.12)
   forty_jekyll_theme!
   jekyll (~> 4.0)
   kramdown-math-katex
