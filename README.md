@@ -74,17 +74,16 @@ kramdown:
 
 ## Running the website locally
 
-When you get to this step `bundle exec jekyll serve --watch` to run Jekyll locally, you might get some errors about `bundler` versions, but they will tell you what to do. In the case on a new laptop, I had to run the following commands - 
+To see drafts locally, the command to run is `bundle exec jekyll serve --watch --draft --trace`.
 
-```
-gem install bundler:1.17.3
-```
-and then 
+### Common errors
+If you get an error about `google-protobuf`s, the canonical way to solve it is to just uninstall and install it again.
 
+```zsh
+gem uninstall google-protobuf
+gem install --platform ruby google-protobuf
 ```
-bundle _1.17.3_ update
-```
-After running these, `bundle exec jekyll serve --watch` will work.
+
 # Forty - Jekyll Theme
 
 Will this  change show up? 
